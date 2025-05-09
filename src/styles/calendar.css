@@ -1,0 +1,94 @@
+/* Calendar Styles */
+.fc {
+  --fc-border-color: theme("colors.gray.200");
+  --fc-button-bg-color: theme("colors.blue.600");
+  --fc-button-border-color: theme("colors.blue.600");
+  --fc-button-hover-bg-color: theme("colors.blue.700");
+  --fc-button-hover-border-color: theme("colors.blue.700");
+  --fc-button-active-bg-color: theme("colors.blue.800");
+  --fc-button-active-border-color: theme("colors.blue.800");
+}
+
+.fc .fc-toolbar {
+  @apply flex-wrap gap-4;
+}
+
+.fc .fc-toolbar-title {
+  @apply text-xl font-bold text-gray-800;
+}
+
+@media (max-width: 640px) {
+  .fc .fc-toolbar {
+    @apply flex-col items-stretch;
+  }
+
+  .fc .fc-toolbar-title {
+    @apply text-center;
+  }
+
+  .fc .fc-button-group {
+    @apply justify-center;
+  }
+}
+
+.fc .fc-button {
+  @apply shadow-sm text-sm font-medium;
+}
+
+.fc .fc-button-primary:not(:disabled):active,
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+  @apply shadow-inner;
+}
+
+.fc .fc-daygrid-day-number {
+  @apply text-sm text-gray-600;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  @apply bg-blue-50;
+}
+
+.fc .fc-daygrid-event {
+  @apply rounded-lg shadow-sm border-0;
+}
+
+.fc .fc-event {
+  @apply cursor-pointer transition-transform hover:scale-[1.02];
+}
+
+.fc .fc-more-link {
+  @apply text-sm text-blue-600 hover:text-blue-700;
+}
+
+.calendar-container {
+  @apply rounded-lg overflow-hidden;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  .fc .fc-daygrid-event {
+    @apply text-xs;
+  }
+
+  .fc .fc-toolbar-chunk {
+    @apply flex justify-center;
+  }
+}
+
+/* Add smooth transitions */
+.fc .fc-button,
+.fc .fc-event,
+.fc .fc-more-link {
+  @apply transition-all duration-200;
+}
+
+/* Improve touch targets on mobile */
+@media (max-width: 640px) {
+  .fc .fc-button {
+    @apply p-3;
+  }
+
+  .fc .fc-daygrid-day-number {
+    @apply p-2;
+  }
+}

@@ -1,0 +1,571 @@
+.space-bg {
+  background-color: #050619;
+  background-image:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 255, 255, 0.1) 1px,
+      transparent 1px
+    ),
+    radial-gradient(
+      circle at 20% 80%,
+      rgba(255, 255, 255, 0.05) 2px,
+      transparent 2px
+    ),
+    radial-gradient(
+      circle at 80% 20%,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    );
+  background-size:
+    50px 50px,
+    75px 75px,
+    100px 100px;
+  background-position:
+    0 0,
+    25px 25px,
+    -25px -25px;
+}
+
+.nebula-glow {
+  box-shadow:
+    0 0 20px rgba(153, 51, 255, 0.1),
+    0 0 40px rgba(153, 51, 255, 0.05);
+}
+
+.star-twinkle {
+  animation: twinkle 1.5s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Calendar Theme Overrides */
+.space-calendar.fc {
+  --fc-border-color: rgba(255, 255, 255, 0.1);
+  --fc-button-bg-color: #3940de;
+  --fc-button-border-color: #3940de;
+  --fc-button-hover-bg-color: #2a2fa8;
+  --fc-button-hover-border-color: #2a2fa8;
+  --fc-button-active-bg-color: #1c1f72;
+  --fc-button-active-border-color: #1c1f72;
+  --fc-event-border-color: transparent;
+  --fc-page-bg-color: transparent;
+  --fc-neutral-bg-color: rgba(5, 6, 25, 0.8);
+  --fc-list-event-hover-bg-color: rgba(57, 64, 222, 0.1);
+  --fc-today-bg-color: rgba(57, 64, 222, 0.15);
+}
+
+.space-calendar .fc-day {
+  background: rgba(5, 6, 25, 0.5);
+}
+
+.space-calendar .fc-day-today {
+  background: rgba(57, 64, 222, 0.15) !important;
+}
+
+.space-calendar .fc-daygrid-day-number {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+}
+
+.space-calendar .fc-daygrid-day-top {
+  padding: 4px;
+}
+
+.space-calendar .fc-toolbar-title {
+  color: white;
+}
+
+.space-calendar .fc-day-other .fc-daygrid-day-number {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.space-calendar .fc-event {
+  margin: 2px 3px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.space-calendar .fc-daygrid-event {
+  white-space: normal;
+  padding: 0 !important;
+}
+
+.space-calendar .fc-daygrid-day-events {
+  margin: 0 !important;
+  padding: 2px 0 !important;
+  min-height: 0 !important;
+}
+
+.space-calendar .fc-daygrid-body-balanced .fc-daygrid-day-events {
+  position: relative !important;
+}
+
+/* Style the "more" link */
+.space-calendar .fc-daygrid-more-link {
+  display: block !important;
+  margin: 2px 3px !important;
+  padding: 3px 6px !important;
+  background: rgba(57, 64, 222, 0.3) !important;
+  border: 1px solid rgba(102, 112, 255, 0.3) !important;
+  border-radius: 4px !important;
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-size: 11px !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.space-calendar .fc-daygrid-more-link:hover {
+  background: rgba(57, 64, 222, 0.4) !important;
+  border-color: rgba(102, 112, 255, 0.4) !important;
+}
+
+/* Improve day cell layout */
+.space-calendar .fc-daygrid-day-frame {
+  min-height: 80px !important;
+  padding: 2px !important;
+}
+
+.space-calendar .fc-daygrid-day-top {
+  padding: 2px 4px !important;
+  margin-bottom: 1px !important;
+}
+
+/* Event content styling */
+.space-calendar .event-content {
+  padding: 2px 4px !important;
+  margin: 1px 0 !important;
+}
+
+/* More events popover styling */
+.space-calendar .fc-popover {
+  background: rgba(5, 6, 25, 0.95) !important;
+  border: 1px solid rgba(102, 112, 255, 0.3) !important;
+  border-radius: 8px !important;
+  backdrop-filter: blur(10px) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+}
+
+.space-calendar .fc-popover-header {
+  background: rgba(57, 64, 222, 0.2) !important;
+  padding: 6px 8px !important;
+  border-bottom: 1px solid rgba(102, 112, 255, 0.2) !important;
+}
+
+.space-calendar .fc-popover-title {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500 !important;
+}
+
+.space-calendar .fc-popover-close {
+  color: rgba(255, 255, 255, 0.6) !important;
+  opacity: 0.8 !important;
+}
+
+.space-calendar .fc-popover-body {
+  padding: 6px !important;
+}
+
+/* Ensure proper event stacking */
+.space-calendar .fc-daygrid-event-harness {
+  margin: 2px 0 !important;
+}
+
+.space-calendar .fc-daygrid-event-harness:first-of-type {
+  margin-top: 4px !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .space-calendar .fc-daygrid-day-frame {
+    min-height: 60px !important;
+  }
+
+  .space-calendar .event-content {
+    padding: 1px 3px !important;
+  }
+
+  .space-calendar .fc-daygrid-more-link {
+    margin: 1px 2px !important;
+    padding: 2px 4px !important;
+  }
+}
+
+/* Improve event text legibility */
+.space-calendar .event-content {
+  line-height: 1.2 !important;
+}
+
+.space-calendar .event-content > div {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+/* Improve button visibility */
+.space-calendar .fc-button-primary {
+  background-color: rgba(57, 64, 222, 0.9) !important;
+  border-color: rgba(102, 112, 255, 0.5) !important;
+  color: white !important;
+  font-weight: 500;
+  padding: 6px 12px;
+}
+
+.space-calendar .fc-button-primary:hover {
+  background-color: rgba(42, 47, 168, 0.9) !important;
+  border-color: rgba(102, 112, 255, 0.7) !important;
+}
+
+.space-calendar .fc-button-primary:not(:disabled):active,
+.space-calendar .fc-button-primary:not(:disabled).fc-button-active {
+  background-color: rgba(28, 31, 114, 0.9) !important;
+  border-color: rgba(102, 112, 255, 0.9) !important;
+}
+
+/* Add grid lines */
+.space-calendar .fc-scrollgrid {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.space-calendar .fc-scrollgrid td,
+.space-calendar .fc-scrollgrid th {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Week number styling if enabled */
+.space-calendar .fc-day-number {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* More events link */
+.space-calendar .fc-more-link {
+  color: rgba(102, 112, 255, 0.9);
+  background: rgba(5, 6, 25, 0.8);
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.space-calendar .fc-more-link:hover {
+  color: rgba(102, 112, 255, 1);
+  text-decoration: none;
+}
+
+/* Event Detail Page Styles */
+.nebula-glow {
+  box-shadow:
+    0 0 20px rgba(153, 51, 255, 0.1),
+    0 0 40px rgba(153, 51, 255, 0.05);
+}
+
+/* Improve text readability with text shadow */
+.text-white {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Status badge glow effect */
+.border-cosmos-500 {
+  box-shadow: 0 0 10px rgba(153, 51, 255, 0.3);
+}
+
+.border-nebula-500 {
+  box-shadow: 0 0 10px rgba(255, 26, 201, 0.3);
+}
+
+/* Section background hover effect */
+.bg-space-800\/50 {
+  transition: background-color 0.2s ease;
+}
+
+.bg-space-800\/50:hover {
+  background-color: rgba(14, 16, 60, 0.6);
+}
+
+/* Improved contrast for section titles */
+.text-cosmos-200 {
+  color: #e5ccff;
+}
+
+/* Better visibility for icons */
+.text-cosmos-400 {
+  color: #b366ff;
+}
+
+/* Calendar Header and Navigation Styles */
+.space-calendar .fc-toolbar {
+  padding: 1rem;
+  background: rgba(14, 16, 60, 0.6);
+  border-radius: 8px;
+  margin-bottom: 1rem !important;
+  border: 1px solid rgba(102, 112, 255, 0.2);
+}
+
+/* Month/Year Title */
+.space-calendar .fc-toolbar-title {
+  color: #ffffff !important;
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.5px;
+  background: linear-gradient(to bottom, #ffffff, #e5ccff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Navigation Buttons */
+.space-calendar .fc-button-primary {
+  background-color: rgba(57, 64, 222, 0.9) !important;
+  border-color: rgba(102, 112, 255, 0.5) !important;
+  color: #ffffff !important;
+  font-weight: 500 !important;
+  padding: 0.5rem 1rem !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease !important;
+}
+
+.space-calendar .fc-button-primary:hover {
+  background-color: rgba(42, 47, 168, 0.9) !important;
+  border-color: rgba(102, 112, 255, 0.7) !important;
+  box-shadow: 0 0 10px rgba(102, 112, 255, 0.3);
+}
+
+.space-calendar .fc-button-primary:not(:disabled):active,
+.space-calendar .fc-button-primary:not(:disabled).fc-button-active {
+  background-color: rgba(28, 31, 114, 0.9) !important;
+  border-color: rgba(102, 112, 255, 0.9) !important;
+}
+
+/* Day Names Header (Sun, Mon, etc.) */
+.space-calendar .fc-col-header {
+  background: linear-gradient(
+    to bottom,
+    rgba(57, 64, 222, 0.3),
+    rgba(14, 16, 60, 0.8)
+  ) !important;
+  border-bottom: 2px solid rgba(102, 112, 255, 0.3) !important;
+}
+
+.space-calendar .fc-col-header-cell {
+  padding: 8px 0 !important;
+  background: transparent !important;
+}
+
+.space-calendar .fc-col-header-cell-cushion {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  font-size: 1rem !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  padding: 8px 4px !important;
+  width: 100% !important;
+  display: inline-block !important;
+  text-align: center !important;
+  text-decoration: none !important;
+}
+
+/* Header row background */
+.space-calendar .fc-theme-standard th {
+  border-color: rgba(102, 112, 255, 0.2) !important;
+  background: rgba(14, 16, 60, 0.8) !important;
+}
+
+/* Toolbar container */
+.space-calendar .fc-toolbar.fc-header-toolbar {
+  background: linear-gradient(
+    to bottom,
+    rgba(14, 16, 60, 0.9),
+    rgba(14, 16, 60, 0.7)
+  ) !important;
+  margin-bottom: 1em !important;
+  padding: 1.5rem 1rem !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(102, 112, 255, 0.2) !important;
+}
+
+/* Add subtle divider lines between days */
+.space-calendar .fc-col-header-cell {
+  position: relative !important;
+}
+
+.space-calendar .fc-col-header-cell:not(:last-child)::after {
+  content: "" !important;
+  position: absolute !important;
+  right: 0 !important;
+  top: 25% !important;
+  height: 50% !important;
+  width: 1px !important;
+  background: rgba(102, 112, 255, 0.2) !important;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .space-calendar .fc-toolbar-title {
+    font-size: 1.5rem !important;
+  }
+
+  .space-calendar .fc-col-header-cell-cushion {
+    font-size: 0.875rem !important;
+    padding: 6px 2px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .space-calendar .fc-toolbar-title {
+    font-size: 1.25rem !important;
+  }
+
+  .space-calendar .fc-col-header-cell-cushion {
+    font-size: 0.75rem !important;
+    padding: 4px 1px !important;
+    letter-spacing: 0.5px !important;
+  }
+}
+
+/* Weekend day headers slightly different style */
+.space-calendar .fc-day-sun .fc-col-header-cell-cushion,
+.space-calendar .fc-day-sat .fc-col-header-cell-cushion {
+  color: #b366ff !important; /* Light purple for weekends */
+  font-weight: 700 !important;
+}
+
+/* Hover effect on day headers */
+.space-calendar .fc-col-header-cell-cushion:hover {
+  color: #e5ccff !important;
+  transition: color 0.2s ease !important;
+}
+
+/* Countdown Timer Styles */
+.countdown-container {
+  background: rgba(14, 16, 60, 0.6);
+  border-radius: 12px;
+  padding: 2rem;
+  border: 1px solid rgba(102, 112, 255, 0.2);
+}
+
+.countdown-digit {
+  font-family: "Space Mono", monospace;
+  text-shadow: 0 0 10px rgba(102, 112, 255, 0.5);
+}
+
+.countdown-label {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Live indicator pulse animation */
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(239, 68, 68, 0.5);
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
+  }
+}
+
+.live-indicator {
+  animation: pulse-glow 2s infinite ease-in-out;
+}
+
+/* Mobile optimizations */
+@media (max-width: 640px) {
+  /* Calendar Header */
+  .space-calendar .fc-toolbar {
+    padding: 0.5rem !important;
+  }
+
+  .space-calendar .fc-toolbar-title {
+    font-size: 1rem !important;
+    white-space: normal !important;
+    text-align: center !important;
+  }
+
+  .space-calendar .fc-toolbar-chunk {
+    display: flex !important;
+    justify-content: center !important;
+    margin-bottom: 0.5rem !important;
+  }
+
+  /* Buttons */
+  .space-calendar .fc-button {
+    padding: 0.3rem 0.5rem !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* Day names */
+  .space-calendar .fc-col-header-cell-cushion {
+    padding: 4px 0 !important;
+    font-size: 0.7rem !important;
+  }
+
+  /* Day cells */
+  .space-calendar .fc-daygrid-day-frame {
+    min-height: 60px !important;
+    padding: 1px !important;
+  }
+
+  /* Day numbers */
+  .space-calendar .fc-daygrid-day-number {
+    padding: 2px 4px !important;
+    font-size: 0.75rem !important;
+  }
+
+  /* Events */
+  .space-calendar .event-content {
+    padding: 1px 2px !important;
+  }
+
+  /* More link */
+  .space-calendar .fc-daygrid-more-link {
+    margin: 0 !important;
+    padding: 1px 3px !important;
+    font-size: 0.7rem !important;
+  }
+
+  /* View selector */
+  .space-calendar .fc-button-group {
+    flex-wrap: wrap !important;
+  }
+
+  /* Week view - make days taller */
+  .space-calendar .fc-dayGridWeek-view .fc-daygrid-day {
+    height: 100px !important;
+  }
+}
+
+/* Ensure event text is visible on all screen sizes */
+.space-calendar .fc-event-title,
+.space-calendar .fc-event-time {
+  font-weight: bold !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Touch-friendly targets */
+.space-calendar .fc-daygrid-event,
+.space-calendar .fc-daygrid-more-link,
+.space-calendar .fc-button {
+  touch-action: manipulation !important;
+}
+
+/* Optimize popover for mobile */
+.space-calendar .fc-popover {
+  max-width: 80vw !important;
+}
+
+/* Ensure popover content is readable */
+.space-calendar .fc-popover-body .fc-daygrid-event {
+  margin: 4px 0 !important;
+}
