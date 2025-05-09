@@ -1,12 +1,8 @@
 # 🚀 Space Launch Calendar
 
-![License](https://img.shields.io/github/license/yourusername/space-launch-calendar?style=flat-square)
-![Issues](https://img.shields.io/github/issues/yourusername/space-launch-calendar?style=flat-square)
-![Pull Requests](https://img.shields.io/github/issues-pr/yourusername/space-launch-calendar?style=flat-square)
-
 A sleek and responsive web app to explore upcoming rocket launches around the world. Built with **React**, **Vite**, and **Tailwind CSS**, it features a modern UI with an interactive calendar, mission details, and live countdown timers.
 
-![Space Launch Calendar](https://via.placeholder.com/1200x630?text=Space+Launch+Calendar)
+![Space Launch Calendar](![image](https://github.com/user-attachments/assets/139a350d-b00f-4b48-918f-28c93f03f6aa)
 
 ---
 
