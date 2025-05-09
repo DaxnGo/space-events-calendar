@@ -1,12 +1,98 @@
-# React + Vite
+# Space Launch Calendar
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application for tracking and visualizing upcoming space launches worldwide. Built with React, Vite, and Tailwind CSS.
 
-Currently, two official plugins are available:
+![Space Launch Calendar](https://via.placeholder.com/1200x630?text=Space+Launch+Calendar)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- **Interactive Calendar**: View upcoming rocket launches in a monthly or weekly calendar format
+- **Launch Details**: Get comprehensive information about each mission including:
+  - Launch provider and rocket details
+  - Mission objectives
+  - Launch location and timing
+  - Countdown timers
+- **Real-time Updates**: Data is fetched from the Launch Library 2 API with caching for optimal performance
+- **Responsive Design**: Works seamlessly across mobile, tablet, and desktop devices
+- **Dark Theme**: Space-themed dark UI optimized for astronomy enthusiasts
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Technology Stack
+
+- **Frontend**: React 18 with React Router for navigation
+- **Build Tool**: Vite for fast development and optimized production builds
+- **Styling**: Tailwind CSS for responsive design
+- **Calendar**: FullCalendar with day grid plugin
+- **API Integration**: Launch Library 2 API by The Space Devs
+- **Additional Libraries**:
+  - react-countdown for launch timers
+  - react-router-dom for navigation
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 14.x or higher
+- npm or yarn package manager
+
+### Installation
+
+1. Clone the repository
+
+   ```bash
+   git clone https://github.com/yourusername/space-launch-calendar.git
+   cd space-launch-calendar
+   ```
+
+2. Install dependencies
+
+   ```bash
+   npm install
+   # or
+   yarn
+   ```
+
+3. Start the development server
+
+   ```bash
+   npm run dev
+   # or
+   yarn dev
+   ```
+
+4. Open your browser and navigate to `http://localhost:5173`
+
+## Available Scripts
+
+- `npm run dev` - Start the development server
+- `npm run build` - Build the application for production
+- `npm run preview` - Preview the production build locally
+- `npm run lint` - Run ESLint to check for code quality issues
+
+## API Usage
+
+This project uses the [Launch Library 2 API](https://thespacedevs.com/llapi) provided by The Space Devs. The API has rate limits, and the application includes fallback mechanisms and caching strategies to handle this gracefully.
+
+## Deployment
+
+The application can be deployed to any static hosting service:
+
+1. Build the project
+
+   ```bash
+   npm run build
+   ```
+
+2. Deploy the contents of the `dist` directory to your hosting provider
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## Acknowledgments
+
+- Data provided by [The Space Devs](https://thespacedevs.com/)
+- Calendar visualization powered by [FullCalendar](https://fullcalendar.io/)
