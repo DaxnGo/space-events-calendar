@@ -14,7 +14,7 @@
 }
 
 .fc .fc-toolbar-title {
-  @apply text-xl font-bold text-gray-800;
+  @apply text-xl font-bold text-blue-900;
 }
 
 @media (max-width: 640px) {
@@ -41,7 +41,7 @@
 }
 
 .fc .fc-daygrid-day-number {
-  @apply text-sm text-gray-600;
+  @apply text-sm text-blue-800 font-medium;
 }
 
 .fc .fc-daygrid-day.fc-day-today {
@@ -91,4 +91,8 @@
   .fc .fc-daygrid-day-number {
     @apply p-2;
   }
+}
+
+.fc .fc-col-header-cell-cushion {
+  @apply text-blue-900 font-semibold;
 }

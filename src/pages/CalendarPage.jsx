@@ -22,14 +22,29 @@ const CalendarPage = () => {
         if (error) setError(null);
 
         const data = await fetchUpcomingLaunches();
-        setLaunches(data);
+
+        // Validate the data
+        if (!data || !Array.isArray(data)) {
+          throw new Error("Invalid data format received from API");
+        }
+
+        // Filter out any malformed launch data
+        const validLaunches = data.filter(
+          (launch) =>
+            launch && launch.id && launch.name && launch.net && launch.status
+        );
+
+        console.log(
+          `Received ${data.length} launches, ${validLaunches.length} valid`
+        );
+        setLaunches(validLaunches);
       } catch (err) {
         if (err.message.includes("429")) {
           setError(
             "The space launch data service is currently rate limited. Please try again in a few minutes."
           );
         } else {
-          setError("Failed to fetch launch data. Please try again later.");
+          setError(`Failed to fetch launch data: ${err.message}`);
         }
         console.error(err);
       } finally {
@@ -58,64 +73,111 @@ const CalendarPage = () => {
     }
   }, [screenSize, view]);
 
-  // Transform launches for FullCalendar
-  const events = launches.map((launch) => ({
-    id: launch.id,
-    title: launch.name,
-    start: new Date(launch.net),
-    allDay: false,
-    backgroundColor:
-      launch.status.abbrev === "Go"
-        ? "rgba(57, 64, 222, 0.9)" // Darker blue for confirmed
-        : "rgba(153, 51, 255, 0.9)", // Darker purple for tentative
-    borderColor:
-      launch.status.abbrev === "Go"
-        ? "#6670FF" // Bright blue border
-        : "#B366FF", // Bright purple border
-    textColor: "#FFFFFF", // White text for better contrast
-    extendedProps: {
-      launchId: launch.id,
-      status: launch.status.abbrev,
-      provider: launch.launch_service_provider?.name,
-    },
-    classNames: ["calendar-event"],
-  }));
+  // Transform launches for FullCalendar with error handling
+  const events = launches.map((launch) => {
+    try {
+      // Safely get properties with defaults if missing
+      const getStatus = () => {
+        try {
+          return launch.status && launch.status.abbrev === "Go";
+        } catch (e) {
+          return false; // Default to non-Go status
+        }
+      };
+
+      const getProviderName = () => {
+        try {
+          return launch.launch_service_provider?.name || "Unknown Provider";
+        } catch (e) {
+          return "Unknown Provider";
+        }
+      };
+
+      const isConfirmed = getStatus();
+
+      return {
+        id: launch.id,
+        title: launch.name || "Unnamed Launch",
+        start: new Date(launch.net),
+        allDay: false,
+        backgroundColor: isConfirmed
+          ? "rgba(57, 64, 222, 0.9)" // Darker blue for confirmed
+          : "rgba(153, 51, 255, 0.9)", // Darker purple for tentative
+        borderColor: isConfirmed
+          ? "#6670FF" // Bright blue border
+          : "#B366FF", // Bright purple border
+        textColor: "#FFFFFF", // White text for better contrast
+        extendedProps: {
+          launchId: launch.id,
+          status: launch.status?.abbrev || "Unknown",
+          provider: getProviderName(),
+        },
+        classNames: ["calendar-event"],
+      };
+    } catch (error) {
+      console.error("Error transforming launch for calendar:", error, launch);
+      // Return a minimal valid event instead of failing
+      return {
+        id:
+          launch.id || `unknown-${Math.random().toString(36).substring(2, 9)}`,
+        title: (launch.name || "Unknown Launch") + " (Data Error)",
+        start: launch.net ? new Date(launch.net) : new Date(),
+        backgroundColor: "rgba(255, 0, 0, 0.5)", // Red for error
+        borderColor: "#FF0000",
+        textColor: "#FFFFFF",
+        extendedProps: {
+          launchId: launch.id || "unknown",
+          status: "Error",
+          provider: "Unknown",
+        },
+      };
+    }
+  });
 
   const handleEventClick = (info) => {
     navigate(`/event/${info.event.extendedProps.launchId}`);
   };
 
   const renderEventContent = (eventInfo) => {
-    const isMobile = window.innerWidth < 768;
-    const eventTime = eventInfo.timeText;
-    const eventTitle = eventInfo.event.title;
-    const provider = eventInfo.event.extendedProps.provider;
+    try {
+      const isMobile = window.innerWidth < 768;
+      const eventTime = eventInfo.timeText;
+      const eventTitle = eventInfo.event.title;
+      const provider = eventInfo.event.extendedProps.provider;
 
-    // Truncate long titles
-    const truncateText = (text, maxLength) => {
-      if (!text) return "";
-      return text.length > maxLength
-        ? text.substring(0, maxLength) + "..."
-        : text;
-    };
+      // Truncate long titles
+      const truncateText = (text, maxLength) => {
+        if (!text) return "";
+        return text.length > maxLength
+          ? text.substring(0, maxLength) + "..."
+          : text;
+      };
 
-    const truncatedTitle = truncateText(eventTitle, isMobile ? 15 : 20);
+      const truncatedTitle = truncateText(eventTitle, isMobile ? 15 : 20);
 
-    return (
-      <div className="event-content p-1 backdrop-blur-sm bg-space-800/90 rounded border border-space-700">
-        <div className="event-time text-[9px] leading-tight font-medium text-space-200">
-          {eventTime}
-        </div>
-        <div className="event-title text-[10px] leading-tight font-semibold text-white truncate">
-          {truncatedTitle}
-        </div>
-        {!isMobile && provider && (
-          <div className="event-provider text-[8px] leading-tight text-space-300 truncate">
-            {truncateText(provider, 15)}
+      return (
+        <div className="event-content p-1 backdrop-blur-sm bg-space-800/90 rounded border border-space-700">
+          <div className="event-time text-[9px] leading-tight font-medium text-space-200">
+            {eventTime}
           </div>
-        )}
-      </div>
-    );
+          <div className="event-title text-[10px] leading-tight font-semibold text-white truncate">
+            {truncatedTitle}
+          </div>
+          {!isMobile && provider && (
+            <div className="event-provider text-[8px] leading-tight text-space-300 truncate">
+              {truncateText(provider, 15)}
+            </div>
+          )}
+        </div>
+      );
+    } catch (error) {
+      console.error("Error rendering event content:", error);
+      return (
+        <div className="event-content p-1 bg-red-900/80 rounded border border-red-700">
+          <div className="text-[10px] text-white">Data Error</div>
+        </div>
+      );
+    }
   };
 
   // Function to handle clicking on the "more" link
@@ -158,7 +220,9 @@ const CalendarPage = () => {
             />
           </svg>
           <h2 className="text-xl font-bold text-red-400 mb-4">
-            API Rate Limit Exceeded
+            {error.includes("429")
+              ? "API Rate Limit Exceeded"
+              : "Error Loading Launches"}
           </h2>
           <p className="text-space-200 mb-6">{error}</p>
           <button
@@ -166,6 +230,39 @@ const CalendarPage = () => {
             disabled={retrying}
             className={`px-4 py-2 rounded-lg text-white font-medium transition ${retrying ? "bg-blue-700/50 cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700"}`}>
             {retrying ? "Trying again..." : "Try Again"}
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Display empty state if no launches were found
+  if (!launches || launches.length === 0) {
+    return (
+      <div className="container mx-auto px-4">
+        <div className="bg-space-900/90 backdrop-blur-sm rounded-xl border border-space-700 p-8 text-center">
+          <svg
+            className="w-12 h-12 text-cosmos-400 mx-auto mb-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+            />
+          </svg>
+          <h2 className="text-xl font-bold text-white mb-4">
+            No Upcoming Launches
+          </h2>
+          <p className="text-space-200 mb-6">
+            No upcoming launches were found in the database.
+          </p>
+          <button
+            onClick={handleRetry}
+            className="px-4 py-2 rounded-lg text-white font-medium bg-blue-600 hover:bg-blue-700">
+            Refresh Data
           </button>
         </div>
       </div>
@@ -214,8 +311,8 @@ const CalendarPage = () => {
                 center: "title",
                 right: "dayGridMonth,dayGridWeek",
               }}
-              dayMaxEvents={1}
-              dayMaxEventRows={1}
+              dayMaxEvents={5}
+              dayMaxEventRows={5}
               moreLinkContent={({ num }) => `+${num}`}
               eventTimeFormat={{
                 hour: "2-digit",
@@ -231,7 +328,8 @@ const CalendarPage = () => {
           </div>
 
           <div className="mt-4 sm:mt-6 text-center text-xs sm:text-sm text-space-300">
-            Tap on any launch event for details
+            Tap on any launch event for details • Showing {launches.length}{" "}
+            upcoming launches
           </div>
         </div>
       </div>
